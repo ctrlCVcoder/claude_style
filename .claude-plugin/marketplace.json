@@ -1,0 +1,5 @@
+{
+  "name": "ctrlcvcoder-mods",
+  "owner": { "name": "CtrlCVcoder" },
+  "plugins": [{ "name": "usage-band", "source": "./" }]
+}

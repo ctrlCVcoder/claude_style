@@ -1,0 +1,1 @@
+{ "name": "usage-band", "version": "0.1.0", "description": "A band above the prompt showing live Claude usage: 5-hour and 7-day limits, context fill and session cost.", "types": "./types/index.d.ts" }
