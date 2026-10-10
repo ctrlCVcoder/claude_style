@@ -82,6 +82,9 @@ export const register: Register = on => {
       )
     }
 
+    // Draw above whatever hooks beneath this one (e.g. aider-watch) add to the band.
+    const below = await next(e)
+
     const parts = [
       ...data.rateLimits.map(limit => (
         <Text key={limit.kind}>{meter(LABELS[limit.kind] ?? limit.kind, limit.percentUsed, limit.resetsAt)}</Text>
@@ -100,16 +103,19 @@ export const register: Register = on => {
     ]
 
     return (
-      <Box>
-        <Text color="claude" bold>
-          ✦ usage{' '}
-        </Text>
-        {parts.map((part, index) => (
-          <Text key={index}>
-            {index > 0 ? <Text dimColor>  │  </Text> : null}
-            {part}
+      <Box flexDirection="column">
+        <Box>
+          <Text color="claude" bold>
+            ✦ usage{' '}
           </Text>
-        ))}
+          {parts.map((part, index) => (
+            <Text key={index}>
+              {index > 0 ? <Text dimColor>  │  </Text> : null}
+              {part}
+            </Text>
+          ))}
+        </Box>
+        {below}
       </Box>
     )
   })
