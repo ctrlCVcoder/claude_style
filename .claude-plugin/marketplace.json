@@ -1,5 +1,7 @@
 {
-  "name": "ctrlcvcoder-mods",
+  "name": "claude-style",
   "owner": { "name": "CtrlCVcoder" },
-  "plugins": [{ "name": "usage-band", "source": "./" }]
+  "plugins": [
+    { "name": "usage-band", "source": "./usage-band", "description": "Live usage band above the prompt: 5h/7d limits, context fill, cost." }
+  ]
 }

@@ -1,17 +1,18 @@
-# usage-band
+# claude_style
 
-A Claude Code mod: a band above the prompt showing live usage — 5h and 7d
-rate-limit windows with reset times, context fill and session cost. Updates
-whenever the engine measures the session.
+My Claude Code mods, one folder each, listed in `.claude-plugin/marketplace.json`.
 
-```
-✦ usage  5h ▰▰▰▱▱▱▱▱▱▱ 23% ↻ 2h 14m  │  7d ▰▰▰▰▱▱▱▱▱▱ 41% ↻ 3d 5h  │  ctx ▰▱▱▱▱▱▱▱▱▱ 18%  │  spent $0.42
-```
+| Mod | What it does |
+| --- | --- |
+| `usage-band` | Band above the prompt with live 5h/7d limits, context fill and session cost |
 
 ## Install
 
 ```
-/plugin install usage-band --marketplace ctrlCVcoder/usage-band
+/plugin install usage-band --marketplace ctrlCVcoder/claude_style
 ```
 
-Rate-limit windows only appear on a Claude subscription, after the first response.
+## Adding a mod
+
+Add a folder with `.claude-plugin/plugin.json` and `hooks/`, then add an entry to
+`plugins` in `.claude-plugin/marketplace.json` with `"source": "./<folder>"`.
