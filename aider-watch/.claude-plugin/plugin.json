@@ -1,0 +1,1 @@
+{ "name": "aider-watch", "version": "0.1.0", "description": "A band above the prompt showing the task Claude delegates to aider, its running time, and the outcome.", "types": "./types/index.d.ts" }

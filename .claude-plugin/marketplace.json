@@ -2,6 +2,7 @@
   "name": "claude-style",
   "owner": { "name": "CtrlCVcoder" },
   "plugins": [
-    { "name": "usage-band", "source": "./usage-band", "description": "Live usage band above the prompt: 5h/7d limits, context fill, cost." }
+    { "name": "usage-band", "source": "./usage-band", "description": "Live usage band above the prompt: 5h/7d limits, context fill, cost." },
+    { "name": "aider-watch", "source": "./aider-watch", "description": "Shows the task Claude delegates to aider, its running time and outcome." }
   ]
 }

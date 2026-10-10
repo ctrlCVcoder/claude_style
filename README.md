@@ -5,6 +5,7 @@ My Claude Code mods, one folder each, listed in `.claude-plugin/marketplace.json
 | Mod | What it does |
 | --- | --- |
 | `usage-band` | Band above the prompt with live 5h/7d limits, context fill and session cost |
+| `aider-watch` | Band showing the task Claude delegates to aider, its running time and outcome |
 
 ## Install
 
