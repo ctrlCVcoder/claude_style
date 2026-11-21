@@ -5,10 +5,20 @@ import type { UsageSnapshot } from '../types'
 
 const snapshot = atom({ plugin: 'usage-band', key: 'snapshot' } as const, null)
 
+const activeModel = atom({ plugin: 'usage-band', key: 'model' } as const, null)
+
 const LABELS: Record<string, string> = {
   five_hour: '5h',
   seven_day: '7d',
   spend_limit: 'spend',
+}
+
+// 'claude-sonnet-5-5' -> 'sonnet 5.5', drops date suffixes and [1m] tags
+const prettyModel = (id: string) => {
+  const base = id.replace(/\[.*\]$/, '').replace(/^claude-/, '').replace(/-\d{8}$/, '')
+  const match = base.match(/^([a-z]+)-(\d+(?:-\d+)*)$/)
+
+  return match ? `${match[1]} ${match[2].replace(/-/g, '.')}` : base
 }
 
 const BAR_CELLS = 10
@@ -53,8 +63,18 @@ export const register: Register = on => {
     return next(e)
   })
 
+  // main loop only: subagents may run on other models
+  on('turn.step', async function* ($, e, next) {
+    if (!e.agentId) {
+      await update($, activeModel, () => e.model)
+    }
+
+    return yield* next(e)
+  })
+
   on('ui.render', { component: 'AbovePrompt' }, async ($, e, next) => {
     const data = await read($, snapshot)
+    const model = await read($, activeModel)
 
     if (e.props.hasSurvey || data === null) {
       return next(e)
@@ -108,6 +128,12 @@ export const register: Register = on => {
           <Text color="claude" bold>
             ✦ usage{' '}
           </Text>
+          {model ? (
+            <Text>
+              <Text color="claude">{prettyModel(model)}</Text>
+              <Text dimColor>  │  </Text>
+            </Text>
+          ) : null}
           {parts.map((part, index) => (
             <Text key={index}>
               {index > 0 ? <Text dimColor>  │  </Text> : null}
